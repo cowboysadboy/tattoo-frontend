@@ -1,7 +1,14 @@
-FROM node:12-alpine
-WORKDIR /dist
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build --prod
-CMD ["npm", "start"]
+# Определяем исходный образ
+FROM nginx:alpine
+
+# Устанавливаем рабочую директорию
+WORKDIR /usr/share/nginx/html
+
+# Удаляем стандартный index.html
+RUN rm -rf ./*
+
+# Копируем файлы из директории "dist" в контейнер
+COPY ./dist/tattoo /usr/share/nginx/html
+
+# Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"]
