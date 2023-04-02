@@ -1,5 +1,5 @@
 FROM node:12-alpine
-WORKDIR /tattoo-frontend
+WORKDIR /dist
 COPY package*.json ./
 RUN npm install
 COPY . .
