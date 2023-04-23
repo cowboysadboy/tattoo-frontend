@@ -26,7 +26,8 @@ export class AuthComponent {
         console.log(this.token);
 
         this.localStorage.store('token', this.token);
-        // this.router.navigate([`auth`]);
+        this.localStorage.store('user', this.userToken?.id);
+        this.router.navigate(['']);
       },
       (err) => console.log(err)
     );

@@ -21,8 +21,8 @@ export class RegisterComponent {
       (res) => {
         this.userToken = res;
         this.localStorage.store('token', this.userToken?.token);
-        console.log(this.userToken?.token);
-        // this.router.navigate([`auth`]);
+        this.localStorage.store('user', this.userToken?.id);
+        this.router.navigate(['']);
       },
       (err) => console.log(err)
     );

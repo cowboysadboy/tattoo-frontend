@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,18 @@ import { LocalStorageService } from 'ngx-webstorage';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'tattoo';
-  token = '';
-  constructor(private localStorage: LocalStorageService) {}
+  title = 'App';
+  constructor(
+    private localStorage: LocalStorageService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
-    this.token = this.localStorage.retrieve('token');
-  }
-  logOut(){
-    this.localStorage.clear('token')
+    const token = this.localStorage.retrieve('user');
+    if (this.localStorage.retrieve('user')) {
+      this.router.navigate(['']);
+    } else{
+      this.router.navigate([`auth`]);
+    }
+    
   }
 }
